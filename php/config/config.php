@@ -16,8 +16,8 @@ define ('DEBUG_SQL_ALL', 1);
 define ('BENCHMARK' , true);
 
 # Main path settings
-define ('MAIN_DIR', '/storage/shared/www/ghostbox.org/www');
-define ('DOMAIN_URL', 'http://www.ghostbox.org');
+define ('MAIN_DIR', 'DETECT');
+define ('DOMAIN_URL', 'DETECT');
 
 # Database settings
 define ('DB_HOST', '127.0.0.1');
@@ -56,7 +56,7 @@ define ('CACHE_URL', DOMAIN_URL.CACHE_PATH); // full path to cache
 # Sub Directories
 define ('DATA_DIR', MAIN_DIR.'/data'); // location of images on disk
 define ('TEMPLATE_DIR', MAIN_DIR.'/templates'); // location of templates on disk
-define ('CACHE_DIR', MAIN_DIR.'/html'.CACHE_PATH); // location of cache on disk
+define ('CACHE_DIR', MAIN_DIR.CACHE_PATH); // location of cache on disk
 
 
 ?>
