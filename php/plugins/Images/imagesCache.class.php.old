@@ -1,0 +1,159 @@
+<?php
+
+namespace Images;
+
+class imagesCache extends imagesHandler {
+    private static $cache_by_id_size;
+
+    // return cached image for item (or default empty folder?)
+    /*
+    public static function getCache($item, $size) {
+        
+        if (!isset(self::$cache_by_id_size["{$item->itemid}_{$size}"])) {
+            if (!isset(self::$database)) { self::$database = new \databaseHelper(); }
+
+            $result = self::$database->query("SELECT cachename FROM cache WHERE itemid=? and size=?", 
+                        ($item->directory==1)?$item->highlight:$item->itemid,  $size);
+                debug(1, "getCache: ".print_r($result,true));
+                if ($result) { debug(1, "file exists? ".CACHE_DIR.'/'.$result[0]->cachename); }
+            if (($result) && (is_file(CACHE_DIR.'/'.$result[0]->cachename))) { 
+                // file is in cache, return cache - and on disk
+                self::$cache_by_id_size["{$item->itemid}_{$size}"] = CACHE_PATH.'/'.$result[0]->cachename;
+            } elseif (($item->directory==1)  && ($item->highlight == 0)) {
+                // directory does not have highlight
+                self::$cache_by_id_size["{$item->itemid}_{$size}"] = '/images/empty.png';
+            } else {
+                // remove our selved from the database if we're here (stale thumbnails)
+                if (isset($result[0]->cachename)) {
+                    self::$database->delete("DELETE FROM cache WHERE itemid=? and size=?",  ($item->directory==1)?$item->highlight:$item->itemid,  $size);
+                }
+                // no cache yet, but we have an item, so lets point to that
+                self::$cache_by_id_size["{$item->itemid}_{$size}"] = '/generate/'.(($item->directory==1)?$item->highlight:$item->itemid).'?h='.$size;
+            }
+        }
+        // store cache
+        if (isset(self::$cache_by_id_size["{$item->itemid}_{$size}"])) {
+            return self::$cache_by_id_size["{$item->itemid}_{$size}"];
+        }
+        /*
+
+        if (($item->cachename) && (is_file(CACHE_DIR.'/'.$item->cachename))) {
+            return CACHE_PATH.'/'.$item->cachename;
+        } elseif (($item->directory==1)  && ($item->highlight == 0)) {
+            return '/images/empty.png';
+        } else {
+            // re-create thumbnail, its gone
+            if (!isset(self::$database)) { self::$database = new \databaseHelper(); }
+            self::$database->delete("DELETE FROM cache WHERE itemid=? and size=?",  ($item->directory==1)?$item->highlight:$item->itemid,  $size);
+            return '/generate/'.(($item->directory==1)?$item->highlight:$item->itemid).'?h='.$size;
+        }*/
+    /*}*/
+/*
+    public static function checkCache($item, $size) {
+        
+        if (($item->cachename) && (is_file(CACHE_DIR.'/'.$item->cachename))) {
+            return CACHE_PATH.'/'.$item->cachename;
+        } elseif (($item->directory==1)  && ($item->highlight == 0)) {
+            return '/images/empty.png';
+        } else {
+            // re-create thumbnail, its gone
+            if (!isset(self::$database)) { self::$database = new \databaseHelper(); }
+            self::$database->delete("DELETE FROM cache WHERE itemid=? and size=?",  ($item->directory==1)?$item->highlight:$item->itemid,  $size);
+            return '/generate/'.(($item->directory==1)?$item->highlight:$item->itemid).'?h='.$size;
+        }
+    }
+*/
+
+/*
+
+    public static function createCache($item, $width, $height, $bg = 0) {
+        $benchmark = new \Benchmark(__FUNCTION__);
+
+        if (!isset(self::$database)) { self::$database = new \databaseHelper(); }
+        // check if we are not already cached
+        $result = self::$database->query("SELECT cachename FROM cache WHERE itemid=? and size=?", 
+                    $item->get('itemid'), $width+$height);
+        $benchmark->close(__FUNCTION__,'sql');
+        if ($result) {
+            if (file_exists(CACHE_DIR.'/'.$result[0]->cachename[0].'/'.$result[0]->cachename[1].'/'.substr($result[0]->cachename,2,strlen($result[0]->cachename)-2))) {
+                debug(16, "another cache update?");
+                return CACHE_PATH.'/'.$result[0]->cachename[0].'/'.$result[0]->cachename[1].'/'.substr($result[0]->cachename,2,strlen($result[0]->cachename)-2);
+            }
+        }
+
+        // created new cache
+        if ( (($width <= 400) && ($width > 0)) 
+         || (($height <= 400) && ($height > 0)) ) { $action = '-thumbnail'; } else { $action = '-size'; }
+
+        $path = self::getPathById($item);
+        $source = DATA_DIR.'/'.$path;
+        $cache = sha1($source).$item->get('rotation').$width.$height.$item->get('name');
+        if (!is_dir(CACHE_DIR.'/'.$cache[0])) { mkdir(CACHE_DIR.'/'.$cache[0]); }
+        if (!is_dir(CACHE_DIR.'/'.$cache[0].'/'.$cache[1])) { mkdir(CACHE_DIR.'/'.$cache[0].'/'.$cache[1]); }
+        $destination = CACHE_DIR.'/'.$cache[0].'/'.$cache[1].'/'.substr($cache,2,strlen($cache)-2);
+
+        // generate thumbnail
+
+        debug(16,"/usr/bin/convert ".
+                    self::rotateImageParams($item->get('rotation'))." ".
+                    $action." ".
+                    ($width?$width:'')."x".($height?$height:'')." ".
+                    "-strip -quality ".THUMBNAIL_QUALITY." ".
+                    escapeshellarg($source).' '.escapeshellarg($destination).($bg==1?" >/dev/null &":""));
+
+        exec("/usr/bin/convert ".
+                    self::rotateImageParams($item->get('rotation'))." ".
+                    $action." ".
+                    ($width?$width:'')."x".($height?$height:'')." ".
+                    "-strip -quality ".THUMBNAIL_QUALITY." ".
+                    escapeshellarg($source).' '.escapeshellarg($destination).($bg==1?" >/dev/null &":""),
+                    $output, $result);
+        if ($result == 0) {
+            debug(16, "Written new cache to $destination");
+            self::$database->insert("INSERT INTO cache SET itemid=?, size=?, cachename=?",
+                                $item->get('itemid'), $width+$height, $cache);
+
+            if (($width+$height) == THUMB_SIZE) {
+                $palette = \Images\imagesProcessing::calculatePalette($destination);
+                self::$database->update("update files set color=?, brightness=? where itemid=?", 
+                        $palette->color, $palette->brightness, $item->get('itemid'));
+                debug(16, "Written palette ".print_r($palette,true)." for ".$item->get('itemid'));
+            }
+
+
+        } else {
+            debug(16, "convert failed?".print_r($result,true).print_r($output,true));
+        }
+        $benchmark->close(__FUNCTION__);
+
+        return CACHE_PATH.'/'.$cache[0].'/'.$cache[1].'/'.substr($cache,2,strlen($cache)-2);
+    }
+
+    private static function rotateImageParams($rotation) {
+        //print "rotation: $rotation";
+        $corrections[0]=array('',               '');
+        $corrections[1]=array('',               '');
+        $corrections[2]=array('',               '-flop');
+        $corrections[3]=array('-rotate 180',    '');
+        $corrections[4]=array('',               '-flip');
+        $corrections[5]=array('-rotate 90',     '-flop');
+        $corrections[6]=array('-rotate 90',     '');
+        $corrections[7]=array('-rotate -90',    '-flop');
+        $corrections[8]=array('-rotate -90',    '');
+
+        return " ".$corrections[$rotation][0]." ".$corrections[$rotation][1]." ";
+    }       
+*/
+    
+    public static function swapImageCoordinates($rotation) {
+        if (($rotation>=5) && ($rotation<=8)) {
+            return true;
+        }
+    }       
+
+}
+
+
+
+
+?>

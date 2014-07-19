@@ -1,0 +1,138 @@
+/* profile */
+/* body correction */
+body {
+     margin-top:220px;
+}
+
+/* Navigation */
+nav {
+   clear: both;
+
+}
+#nav_profile_image {
+    position:absolute;
+    top:100px;
+    left:20px;
+    height:100px;
+    width:100px;
+    margin:0px;
+    padding:0px;
+    border:1px solid #888;
+    z-index: 10;
+    box-shadow: 5px 5px 20px #000;
+}
+
+#nav_profile_image img {
+    border-color: rgba(0, 0, 0, 0.6);
+    border-style: solid;
+    border-width: 25px; 
+    padding:1px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+#nav_profile_name {
+  white-space:nowrap;
+  position:absolute;
+  top:120px;
+  left:150px;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: 0 1px 0 #000000;
+}
+#nav_profile_description {
+  white-space:nowrap;
+  position:absolute;
+  top:155px;
+  left:150px;
+  color: #fff;
+  font-size: 16px;
+  text-shadow: 0 1px 0 #000000;
+}
+/* button bar */
+#nav_bar {
+    z-index: 5;
+    position:absolute;
+    min-height: 40px;
+    width:100%;
+    top:180px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-top:1px solid #000;
+    margin:0px;
+    /*border-bottom:1px solid #000;*/
+
+}
+#nav_bar ul {
+    /*list-style-image: none;
+    list-style-position: outside;*/
+    /*display: table;
+    table-layout: fixed;*/
+    list-style-type: none;
+    margin-left: 130px;
+    white-space:nowrap;
+    overflow:none;
+}
+#nav_bar ul li {
+  /*display: table-cell;*/
+  float: left;
+  /*position: relative;*/
+
+/*
+  padding:0px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+  cursor: pointer;
+*/
+
+  /*display: block;*/
+  display: inline;
+  /*clear:none;*/
+}
+#nav_bar ul li a {
+  font-size:18px;
+  text-shadow: 1px 1px 2px #000000;
+  padding-left:20px;
+  padding-right:20px;
+  color:#fff;
+  height:40px;
+  line-height:35px;
+  display: block;
+  border-left:1px solid #444;
+  border-top:1px solid #444;
+  border-right:1px solid #000;
+  display: inline-block;
+}
+#nav_bar ul li a:hover {
+    border-top:1px solid #000;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+#nav_bar ul li .selected {
+    border-top:1px solid #000;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Navigation */
+/* background image */
+#nav_profile_photo {
+    height: 220px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+#nav_background_photo {
+    height:300px;
+    width:100%;
+    /*background-size: 100%;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#nav_profile_mask {
+    position:absolute;
+    top:0px;
+    height:180px;
+    width:100%;
+    background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+/*    z-index: 2;  */
+}

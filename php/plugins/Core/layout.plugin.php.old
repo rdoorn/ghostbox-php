@@ -1,0 +1,17 @@
+<?php
+
+namespace Core;
+
+/*
+function html_layout() {
+    include_once(TEMPLATE_DIR."/layout.php");
+}
+\hooks::add('html_layout', __NAMESPACE__.'\html_layout');
+*/
+
+
+
+//\hooks::add('html_layout', function () { include_once(TEMPLATE_DIR."/layout.php"); } );
+
+
+?>

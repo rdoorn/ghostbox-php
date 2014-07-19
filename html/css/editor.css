@@ -1,0 +1,210 @@
+.frame:hover .image_editor {
+  display: block;
+}
+
+.image_editor {
+    overflow: hidden;
+    z-index: 12;
+    /*display:none;*/
+    position:absolute;
+    right:10px;
+    top:10px;
+/*    height:100%;
+    width:100%;*/
+    height:24px;
+    width:24px;
+    padding:3px;
+    text-shadow: 1px 1px 1px #000000;
+
+    /*background-color: #FF0000;*/
+    /*background-image: linear-gradient(to left, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%);*/
+}
+.image_editor:hover {
+    background-image: radial-gradient(at right top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50% );
+    height:100%;
+    width:100%;
+
+}
+/*
+.image_editor_gradient {
+    position:absolute;
+    right:0px;
+    top:00px;
+    width:50%;
+    height:200%;
+    min-height:100px;
+    background: radial-gradient(right top, ellipse , rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+    background: -o-radial-gradient(right top, ellipse , rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+    background: -ms-radial-gradient(right top, ellipse , rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+    background: -moz-radial-gradient(right top, ellipse , rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+    background: -webkit-radial-gradient(right top, ellipse , rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+}
+*/
+
+.image_editor ul {
+    list-style-type: none;
+    white-space:nowrap;
+    overflow:none;
+}
+
+.image_editor ul li {
+    text-align: right;
+    float:right;
+    clear:both;
+    font-size:0;
+
+}
+
+.personalRating {
+    height:35px !important;
+    line-height:24px;
+    table-layout:fixed;
+    padding-right:150px;
+    background: url("/images/stars.png") no-repeat right -1px;
+}
+.personalRating:hover {
+    font-size:14px;
+}
+
+.editrating0 {
+    background: url("/images/stars.png") no-repeat right -1px;
+}
+
+.editrating1 {
+    background: url("/images/stars.png") no-repeat right -41px;
+}
+
+.editrating2 {
+    background: url("/images/stars.png") no-repeat right -81px;
+}
+
+.editrating3 {
+    background: url("/images/stars.png") no-repeat right -121px;
+}
+
+.editrating4 {
+    background: url("/images/stars.png") no-repeat right -161px;
+}
+
+.editrating5 {
+    background: url("/images/stars.png") no-repeat right -201px;
+}
+
+
+.addTags {
+    font-size:14px !important;
+
+    height:30px;
+    table-layout:fixed;
+    overflow:none;
+    padding-right:30px;
+    background: url("/images/editor/pencil.png") no-repeat right -38px;
+}
+.addTags:hover {
+    background-position: right 0px;
+    font-size:14px;
+}
+
+.rotateLeft {
+    height:30px;
+    table-layout:fixed;
+    overflow:none;
+    padding-right:30px;
+    background: url("/images/editor/rotateleft.png") no-repeat right -37px;
+}
+.rotateLeft:hover {
+    background-position: right 0px;
+    font-size:14px;
+}
+
+.rotateRight {
+    height:30px;
+    table-layout:fixed;
+    overflow:none;
+    padding-right:30px;
+    background: url("/images/editor/rotateright.png") no-repeat right -37px;
+}
+.rotateRight:hover {
+    background-position: right 0px;
+    font-size:14px;
+}
+
+.highlight {
+    height:30px;
+    table-layout:fixed;
+    overflow:none;
+    padding-right:30px;
+    background: url("/images/editor/highlight.png") no-repeat right -38px;
+}
+.highlight:hover {
+    background-position: right 0px;
+    font-size:14px;
+}
+
+.delete {
+    height:30px;
+    table-layout:fixed;
+    overflow:none;
+    padding-right:30px;
+    background: url("/images/editor/delete.png") no-repeat right -38px;
+}
+.delete:hover {
+    background-position: right 0px;
+    font-size:14px;
+}
+
+.showTags div { 
+    border:1px solid #000;
+    background-color: #8080a0;
+    border-radius: 5px;
+    padding:0px 3px 1px 3px; 
+
+}
+.showTags div a { 
+    font-size:14px !important;
+}
+.showTags { 
+    margin-top:-5px;
+    margin-bottom:5px;
+    font-size:12px !important;
+    white-space: pre-wrap;
+    table-layout:fixed;
+    overflow:none;
+    padding-right:25px;
+}
+
+.addTags div { padding:0px; }
+.addTags [contenteditable="true"]:active,
+.addTags [contenteditable="true"]:focus{
+    height:30px;
+    border:1px solid #000;
+    text-align: right;
+    background-color: rgba(0,0,0,0.5);
+    outline:none;
+    height: 20px;
+    width: 140px;
+    padding:0px;
+}
+
+
+.spacer {
+    height:30px;
+}
+
+.selectedimage {
+  background-color: #0000FF !important;
+}
+
+.leftdrag {
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 1), rgba(0, 0, 255, 0)) !important;
+}
+
+.rightdrag {
+  background-image: linear-gradient(to left, rgba(0, 0, 255, 1), rgba(0, 0, 255, 0)) !important;
+}
+
+.centerdrag {
+  /*background-image: radial-gradient(rgba(0, 0, 255, 1), rgba(0, 0, 255, 0.3)) !important; */
+  background-image: linear-gradient(to left, rgba(0, 0, 255, 0) 25%, rgba(0, 0, 255, 1) 50%, rgba(0, 0, 255, 0)) !important;
+}
+

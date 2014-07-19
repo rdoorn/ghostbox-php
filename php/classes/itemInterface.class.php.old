@@ -1,0 +1,9 @@
+<?php
+
+interface ItemInterface {
+    public function find($itemid);
+    public function safe(Item $item);
+    public function remove(Item $item);
+}
+
+?>

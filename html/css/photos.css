@@ -1,0 +1,150 @@
+
+#mainwrap {
+    white-space: nowrap;
+    position: absolute;
+    overflow: hidden;
+    top: 50px; 
+    right: 0px; 
+    bottom: 0px; 
+    left: 0px;
+    padding:0px;
+    margin:0px;
+}
+
+aside {
+    background-color: rgba(0,0,0,0.7);
+    float:right;
+    /*overflow-y: scroll;
+    overflow-x: hidden;*/
+/*    overflow-y: auto;*/
+/*    overflow-x: hidden;*/
+    width:250px;
+    height:100%;
+    position: relative;
+    right:0px;
+    z-index: 5;
+    display: inline-block;
+}
+
+aside div {
+    width: 250px;
+    display: inline-block;
+}
+
+
+article {
+    overflow:hidden;
+    height:100%;
+}
+
+#imageframe {
+  display: none;
+
+}
+article div {
+    position: relative;
+    height:100%;
+    width:100%;
+    /*
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;    
+  */
+}
+
+article div div {
+  position:relative;
+  padding:0px;
+}
+  /*position: relative;*/
+  /*
+      top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  /*height: 200px;*/
+
+/*}*/
+article div div img {
+    max-width:100%;
+    max-height:100%;
+}
+
+
+@media (max-width: 800px) {
+    aside {
+        width: 0px;
+        position:absolute !important;
+    }
+    article {
+        width:100% !important;
+    }
+}
+
+.photomenubutton {
+    position: fixed;
+    opacity: 0.5;
+    height:30px;
+    width:30px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+#menubutton {
+    top:65px;right:15px;
+    background: url("/images/photos/menu.png") no-repeat 2px 2px;
+}
+#menubutton:hover {
+    opacity: 1;
+}
+
+
+#fullscreenbutton {
+    top:65px;right:60px;
+    background: url("/images/photos/fullscreen.png") no-repeat 2px 2px;
+}
+#fullscreenbutton:hover {
+    opacity: 1;
+}
+
+#upbutton {
+    top:65px;right:105px;
+    background: url("/images/photos/up.png") no-repeat 2px 5px;
+}
+#upbutton:hover {
+    opacity: 1;
+}
+
+
+.photoarticlebutton {
+    position: absolute;
+    margin:0px;
+    opacity: 0.5;
+    height:30px;
+    width:30px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    padding:0px;
+    display: none;
+    top:-250px; /* place this off the screen till jquery properly positions it */
+}
+
+#previousbutton {
+    background: rgba(0,0,0,0.7) url("/images/photos/prev.png") no-repeat 2px 2px;
+}
+#previousbutton:hover {
+    opacity: 1;
+}
+
+#nextbutton {
+    position: absolute;
+    background:  rgba(0,0,0,0.7) url("/images/photos/next.png") no-repeat 2px 2px;
+}
+#nextbutton:hover {
+    opacity: 1;
+}
+

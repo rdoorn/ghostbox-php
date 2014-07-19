@@ -1,0 +1,56 @@
+<?php
+
+
+namespace Images;
+
+class imagesHandler {
+    protected static $database;
+
+    public function __construct() {
+        self::$database = new \databaseHelper();
+    }
+
+/*
+    public static function getIdByUrl( $request ) {
+        if (!isset(self::$database)) { self::$database = new \databaseHelper();  }
+        if (isset($request->getRequestVars()[0])) {
+            try {
+                $image = new \ItemObject();
+                $image->getId( $request->getRequestVars()[0] );
+                //$image = self::$database->query("SELECT * FROM items LEFT JOIN files USING (itemid) WHERE itemid=?", $request->getRequestVars()[0]);
+                if ($image) { 
+                    return $image;
+                } else {
+                    throw new \Exception("Invalid image requested", 404);        
+                }
+            } catch ( \Exception $e ) {
+                throw new \Exception("Invalid Image: ".$request->getRequestVars()[0], 404);    
+            }
+        } else {
+            throw new \Exception("No image requested", 404);
+        }
+    }
+
+    public static function getItemById( $itemid ) {
+        $item = new \ItemObject();
+        $item->getId($itemid);
+        return $item;
+    }
+
+
+    public static function getPathById( $item) {
+        $path = $item->get('name');
+        $maxdepth = 0;
+        while (($item->get('parentid') != 0) && ($maxdepth<10)) {
+            $item = self::getItemById($item->get('parentid'));
+            $path = $item->get('name').'/'.$path;
+            $maxdepth++;
+        }
+        return $path;
+    }
+
+}
+*/
+}
+
+?>

@@ -1,0 +1,14 @@
+<?php
+
+class Item {
+    public $itemid;
+    public $parentid;
+    public $directory;
+    public $name;
+    public $displayname;
+    public $date;
+    public $uid;
+    public $views;
+}
+
+?>
