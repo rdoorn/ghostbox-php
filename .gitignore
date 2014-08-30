@@ -1,6 +1,6 @@
 doc/
-data/
-images/cache
+data/*
+images/cache/*
 old/
 photoshop/
 put
