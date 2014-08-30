@@ -23,7 +23,7 @@ define ('DOMAIN_URL', 'DETECT');
 define ('DB_HOST', '127.0.0.1');
 define ('DB_NAME', 'ghostbox');
 define ('DB_USER', 'ghostbox');
-define ('DB_PASS', 'ph0t0s!');
+define ('DB_PASS', 'RANDOM');
 
 # Display tweaks
 define ('THUMB_SIZE', 400);
