@@ -1,0 +1,28 @@
+
+# For .htaccess rewrite to work, you must configure the following in your apache config
+
+# Apache2.2
+#    <Directory /path/to/ghostbox %>>
+#        Options -Indexes +FollowSymLinks
+#        AllowOverride FileInfo RewriteEngine RewriteCond RewriteRule
+#        Order allow,deny
+#        Allow from all
+#    </Directory>
+#
+# Apache2.4
+#    <Directory /path/to/ghostbox %>>
+#        Options -Indexes +FollowSymLinks
+#        AllowOverride FileInfo
+#        AllowOverrideList RewriteEngine RewriteCond RewriteRule
+#        Require all granted
+#    </Directory>
+#
+
+RewriteEngine On
+
+# Do not rewrite the direct links
+RewriteRule ^/robots.txt - [L]
+RewriteRule ^/(css|js|images)/.* - [L]
+
+# Rewrite the remaining to the index.phpq
+RewriteRule ^/(.+)$ /index.php?$1 [L,QSD]
