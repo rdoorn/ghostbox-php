@@ -1,6 +1,10 @@
 <?php
 
-require_once '../php/config/init.php';
+try {
+    require_once 'php/config/init.php';
+} catch {
+    print "First time setup?"
+}
 
 //$request = new rest();
 $httpRequest = new httpRequest();
