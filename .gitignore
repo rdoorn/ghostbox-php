@@ -1,6 +1,4 @@
 doc/
-data/
-images/cache
 old/
 photoshop/
 put
@@ -8,3 +6,4 @@ put
 *.swp
 *.tmp
 *.org
+config.php

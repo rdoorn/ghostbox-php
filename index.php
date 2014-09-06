@@ -1,7 +1,7 @@
 <?php
 
-require_once '../php/config/init.php';
-
+include_once('php/config/init.php');
+    
 //$request = new rest();
 $httpRequest = new httpRequest();
 
@@ -11,8 +11,12 @@ $hook->execute('head');
 
 try {
 
-    $currentUser = new userHelper();
-    $user = $currentUser->getUserBySession( session_id() );
+    if (!defined('EXAMPLE_CONFIG')) {
+        $currentUser = new userHelper();
+        $user = $currentUser->getUserBySession( session_id() );
+    } 
+
+    
     //$currentUser->getUserBySession( session_id() );
 
     // check what resoirce we are calling
@@ -52,6 +56,11 @@ try {
         case 'generate':
             $hook->execute('image_generator', $httpRequest );
             break;
+        case 'setup':
+            $hook->execute('html_layout');
+            print "Starting Setup!";
+            $hook->execute('setup', $httpRequest );
+            break;
 /*        case 'submit':
             $hook->execute('json_submit', $httpRequest );
             break;*/
@@ -60,6 +69,10 @@ try {
             break;*/
         default:
             //$hook->execute('page_view_'.$httpRequest->getResource(), $httpRequest );
+            if (defined('EXAMPLE_CONFIG')) { # First time setup - redirect to /setup
+                Redirect($_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"]."x").'/setup');
+            }
+
             if ($httpRequest->getRequestMethod() == 'put') {
                 if (isset($user)) {
                     $hook->execute('put_article_'.$httpRequest->getResource(), $httpRequest, $user);

@@ -5,7 +5,7 @@ class Benchmark {
     static $data = array();
 
     function __construct($item = null) {
-        if (!BENCHMARK) { return; }
+        if (defined('BENCHMARK') && (!BENCHMARK)) { return; }
             if (!$item) { return; }
             if (!isset(self::$data[$item])) { self::$data[$item] = array(); }
             self::$data[$item]['start'] = microtime(true);
@@ -14,7 +14,7 @@ class Benchmark {
     }
 
     function close($item, $type = 'exec') {
-        if (!BENCHMARK) { return; }
+        if (defined('BENCHMARK') && (!BENCHMARK)) { return; }
             self::$data[$item]['times'][$type][] = microtime(true)-self::$data[$item]['start'];
             self::$data[$item]['start'] = microtime(true);
             if (isset(self::$data[$item]['count'][$type])) { 
@@ -24,7 +24,7 @@ class Benchmark {
             }
     }
     function result() {
-        if (!BENCHMARK) { return; }
+        if (defined('BENCHMARK') && (!BENCHMARK)) { return; }
         foreach (self::$data as $name => $details) {
             //debug(128, "$name.count ".$details['count']);//." total:".array_sum(self::$data[$name]['times'])." avg:".(array_sum(self::$data[$name]['times'])/$details['count']));
             foreach ($details['times'] as $timedname => $times) {

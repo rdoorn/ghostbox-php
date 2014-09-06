@@ -2,7 +2,7 @@
 
 namespace Googleplus;
 
-set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ .'/vendor/google/apiclient/src');
+set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ .'/vendor/google-api-php-client/src');
 
 require_once('Google/Client.php');
 require_once('Google/Service/Plus.php');

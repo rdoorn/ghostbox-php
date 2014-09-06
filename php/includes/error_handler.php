@@ -42,7 +42,8 @@ class UserDeprecatedException       extends ErrorException {}
 // TODO look at http://pear.php.net/package/XML_Serializer
 
     function displayError($error, $httpAccept) {
-        $errorRequest = "{$_SERVER['REQUEST_METHOD']} {$_SERVER['HTTP_HOST']} {$_SERVER['REDIRECT_STATUS']} {$_SERVER['REQUEST_URI']} ({$_SERVER['REDIRECT_URI']})\n";
+        #$errorRequest = "{$_SERVER['REQUEST_METHOD']} {$_SERVER['HTTP_HOST']} {$_SERVER['REDIRECT_STATUS']} {$_SERVER['REQUEST_URI']} ({$_SERVER['REDIRECT_URI']})\n";
+        $errorRequest = "{$_SERVER['REQUEST_METHOD']} {$_SERVER['HTTP_HOST']} {$_SERVER['REQUEST_URI']}\n";
         $errorTrace = "Exception '{$error->getMessage()}'({$error->getCode()}) in {$error->getFile()}({$error->getLine()})\n{$error->getTraceAsString()}";
         $errorMessage=array ( "Success" => false, "Message" => $error->getMessage(), "Code" => $error->getCode() );
         error_log($errorRequest.$errorTrace);
@@ -99,7 +100,7 @@ function assocArrayToXML($root_element_name,$ar)
 }
 
 function debug($level, $detail) {
-    if (DEBUG & $level) {
+    if (defined('DEBUG') && (DEBUG & $level)) {
         error_log("[DEBUG-$level] $detail\n");
         //if (PHP_SAPI != 'cli') { print "<br>"; }
     }

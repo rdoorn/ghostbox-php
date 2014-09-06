@@ -1,0 +1,13 @@
+<?php
+
+# To use this plugin, you have to create a google plus api account to authenticate agains
+# Do so by going to the google developers console
+#
+# https://console.developers.google.com
+#
+define('GOOGLEPLUS_CLIENT_ID', 'your_id');
+define('GOOGLEPLUS_CLIENT_SECRET', 'your_secret');
+define('GOOGLEPLUS_LOGIN_URL', LOGIN_URL.'/googleplus');
+define('GOOGLEPLUS_APP_TITLE', 'Ghostbox');
+
+?>
