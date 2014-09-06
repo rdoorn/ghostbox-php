@@ -2,9 +2,18 @@
 
 
 # Define where the PHP scripts are
-define('PHPCORE_DIR', $_SERVER['DOCUMENT_ROOT']?$_SERVER['DOCUMENT_ROOT'].'/../php':'/storage/shared/www/ghostbox.org/www/php');
+define('PHPCORE_DIR', $_SERVER['DOCUMENT_ROOT']?$_SERVER['DOCUMENT_ROOT'].'/php':'/storage/shared/www/ghostbox.org/www/php');
 
-require_once(PHPCORE_DIR.'/config/config.php');
+if (!file_exists('php/config/config.php' )) {
+    require_once(PHPCORE_DIR.'/config/config.php.example');
+#    print "First time setup?!";
+    define ('EXAMPLE_CONFIG' , true);
+#    define ('DEBUG_SQL_ERROR', 0);
+#    define ('DEBUG_SQL_ALL', 0);
+#    define ('BENCHMARK', false);
+} else {
+    require_once(PHPCORE_DIR.'/config/config.php');
+}
 require_once(PHPCORE_DIR.'/includes/error_handler.php');
 require_once(PHPCORE_DIR.'/includes/general_functions.php');
 
@@ -32,8 +41,8 @@ spl_autoload_register(function ($class) {
 });
 
 # Check requirements
-version_compare(PHP_VERSION, "5.5", "<") and
-  exit("Icarus requires PHP 5.5 or newer (you're using " . PHP_VERSION  . ")");
+version_compare(PHP_VERSION, "5.4", "<") and
+  exit("Ghostbox requires PHP 5.5 or newer (you're using " . PHP_VERSION  . ")");
 
 # Security measures
 header("X-Frame-Options: SAMEORIGIN");
@@ -41,7 +50,13 @@ header("X-Frame-Options: SAMEORIGIN");
 # load plugins
 $hook = new hooks();
 
-$hook->load_plugins(PHPCORE_DIR.'/plugins');
+if (defined('EXAMPLE_CONFIG')) {
+    foreach (array('Core', 'Facebook', 'Googleplus') as $plugin) {
+        $hook->load_plugins(PHPCORE_DIR.'/plugins/'.$plugin);
+    }
+} else {
+    $hook->load_plugins(PHPCORE_DIR.'/plugins');
+}
 
 
 ?>

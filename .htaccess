@@ -22,7 +22,7 @@ RewriteEngine On
 
 # Do not rewrite the direct links
 RewriteRule ^/robots.txt - [L]
-RewriteRule ^/(css|js|images)/.* - [L]
+RewriteRule ^(css|js|images)/.* - [L]
 
 # Rewrite the remaining to the index.phpq
-RewriteRule ^/(.+)$ /index.php?$1 [L,QSD]
+RewriteRule ^(.+)$ /index.php?$1 [END,QSD]

@@ -6,3 +6,4 @@ put
 *.swp
 *.tmp
 *.org
+config.php

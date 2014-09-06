@@ -16,7 +16,7 @@ define ('DEBUG_SQL_ALL', 1);
 define ('BENCHMARK' , true);
 
 # Main path settings
-define ('MAIN_DIR', 'DETECT');
+define ('MAIN_DIR', '.');
 define ('DOMAIN_URL', 'DETECT');
 
 # Database settings
